@@ -1,0 +1,23 @@
+<%= form_with(model: tip, local: true) do |form| %>
+  <% if tip.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tip.errors.count, "error") %> prohibited this tip from being saved:</h2>
+
+      <ul>
+        <% tip.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :tip_description %><br>
+    <%= form.text_field :tip_description, class: "form-control" %>
+  </div>
+  <br>
+
+  <div class="form-group">
+    <%= form.submit "Submit", class: "btn btn-lg btn-primary" %>
+  </div>
+<% end %>
