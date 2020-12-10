@@ -1,13 +1,12 @@
 class TipsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :find_tip, only: [:show, :edit, :update, :destroy]
 
   def index
     @tips = Tip.all.order("created_at DESC")
   end
 
-  def show
-    @tip = Tip.find(params[:id])
-  end
+  def show; end
 
   def new
     @tip = Tip.new(user_id: current_user.id)
@@ -23,9 +22,10 @@ class TipsController < ApplicationController
     end 
   end
 
-  def edit
-    @tip = Tip.find(params[:id])
-    if @tip.edit(tip_params)
+  def edit; end
+
+  def update
+    if @tip.update(tip_params)
         redirect_to @tip, notice: "Tip was Successfully edited!"
     else
         render 'edit'
@@ -33,15 +33,18 @@ class TipsController < ApplicationController
   end
 
   def destroy
-    @tip = Tip.find(params[:id])
     @tip.destroy
     redirect_to root_path
   end 
 
-  byebug
+  private
+
   def tip_params
+    params.permit(:tip_description)
+  end
+
+  def find_tip
     @tip = Tip.find(params[:id])
-    params.require(:tip).permit(:tip_description)
   end
   
 end
