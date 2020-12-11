@@ -3,7 +3,7 @@ class TipsController < ApplicationController
   before_action :find_tip, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tips = Tip.all.order("created_at DESC")
+    @tips = Tip.where(user_id: current_user.id).order('created_at DESC')
   end
 
   def show; end
