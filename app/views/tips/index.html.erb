@@ -1,0 +1,8 @@
+<%@tips.each_with_index do |tip, index| %>
+
+<h2 class="title">
+    <%= link_to tip.tip_description, tip %><br>
+    <small class="author" id="so_este_<%=index%>">Submitted <%= time_ago_in_words(tip.created_at) %> by <%= tip.user.try(:email) %></small>
+    <% end %>
+</h2>
+
