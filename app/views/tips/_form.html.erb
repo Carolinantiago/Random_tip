@@ -1,4 +1,5 @@
 <%= form_with(model: tip, local: true) do |form| %>
+  <div class="container">
   <% if tip.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(tip.errors.count, "error") %> prohibited this tip from being saved:</h2>
