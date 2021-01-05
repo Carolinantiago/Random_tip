@@ -40,7 +40,7 @@ class TipsController < ApplicationController
   private
 
   def tip_params
-    params.permit(:tip_description)
+    params.require(:tip).permit(:tip_description) 
   end
 
   def find_tip
